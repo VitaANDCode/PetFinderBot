@@ -1,5 +1,10 @@
 from aiogram import Bot, Dispatcher
+from aiogram.filters import Command
 from core.handlers.basic import get_start
+from core.handlers.basic import search_pet
+from core.handlers.basic import get_info
+
+from core.handlers.basic import get_site
 
 import asyncio
 
@@ -11,7 +16,10 @@ async def start():
 
     dp = Dispatcher()
 
-    dp.message.register(get_start)
+    dp.message.register(get_start, Command('start'))
+    dp.message.register(get_site, Command('site'))
+    dp.message.register(search_pet, Command('search'))
+    dp.message.register(get_info, Command('info'))
 
     try:
         await dp.start_polling(bot)
